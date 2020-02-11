@@ -5,12 +5,12 @@ const boardDiv = document.querySelector(".board");
 
 let board = [];
 
-// const numberLoop = i => {
-//   for (let j = 0; j < numbersOfBoard.length; j++) {
-//     board[i][j] = [lettersOfBoard[j]];
-//     board[i][j][1] = numbersOfBoard[i];
-//   }
-// };
+const numberLoop = i => {
+  for (let j = 0; j < numbersOfBoard.length; j++) {
+    board[i][j] = [lettersOfBoard[j]];
+    board[i][j][1] = numbersOfBoard[i];
+  }
+};
 
 const nameFields = (letters, numbers) => {
   for (let i = 0; i < letters.length; i++) {
@@ -24,9 +24,7 @@ const nameFields = (letters, numbers) => {
 };
 
 const fields = nameFields(lettersOfBoard, numbersOfBoard);
-fields;
 const numFields = nameFields(lettersToNumbers, numbersOfBoard);
-numFields;
 
 const addFields = () => {
   for (let i = 0; i < fields.length; i++) {
@@ -43,3 +41,10 @@ const addFields = () => {
 };
 addFields();
 
+// ACTUAL CHESS BOARD SQUARES
+const squares = document.querySelectorAll(".field");
+
+const horsie = {
+  name: "chess knight",
+  class: "horsie"
+};

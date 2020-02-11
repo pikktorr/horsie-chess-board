@@ -1,13 +1,13 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 .container {
   display: flex;
   width: 800px;
   height: 800px;
-  border: 1px black solid;
+  border: 30px rgb(121, 85, 72) solid;
   margin: auto;
 }
 
@@ -23,6 +23,12 @@
   background-color: antiquewhite;
   width: 100px;
   height: 100px;
+  transition: 0.2s ease-in;
+}
+.field:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px 1px aqua;
+  cursor: pointer;
 }
 
 .black {
