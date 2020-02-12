@@ -43,8 +43,18 @@ addFields();
 
 // ACTUAL CHESS BOARD SQUARES
 const squares = document.querySelectorAll(".field");
+const squareEvent = squares.forEach(square => {
+  square.addEventListener("click", event => horsie.placeFigure(event));
+});
 
 const horsie = {
   name: "chess knight",
-  class: "horsie"
+  class: "horsie",
+  numberOfMoves: 3,
+  figure: document.querySelector(".horsie"),
+  placeFigure(event) {
+    const parent = event.target;
+    parent.appendChild(this.figure);
+  },
+  move() {}
 };
