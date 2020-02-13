@@ -31,7 +31,8 @@ const addFields = () => {
     const div = document.createElement("div");
     const fieldName = fields[i][0] + fields[i][1];
     const fieldNumber = numFields[i][0] + numFields[i][1];
-    div.className = `field ${fieldName} ${fieldNumber}`;
+    div.className = `field ${fieldName} ${fieldNumber} ${i + 1}`;
+    div.innerHTML = `${fieldName} ${fieldNumber} ${i + 1}`;
     fieldNumber % 2 === 0
       ? div.classList.add("black")
       : div.classList.add("white");
@@ -51,10 +52,33 @@ const horsie = {
   name: "chess knight",
   class: "horsie",
   numberOfMoves: 3,
-  figure: document.querySelector(".horsie"),
   placeFigure(event) {
+    const figure = document.querySelector(".horsie");
     const parent = event.target;
-    parent.appendChild(this.figure);
+    parent.appendChild(figure);
   },
   move() {}
 };
+
+const column = 1;
+const twoColumns = 2 * column;
+const row = 8;
+const twoRows = 2 * row;
+
+const move = (current, column, row) => {
+  const targetField = current - column - row;
+  console.log(targetField);
+};
+
+const allMoves = current => {
+  move(current, twoColumns, row);
+  move(current, -twoColumns, row);
+  move(current, twoColumns, -row);
+  move(current, -twoColumns, -row);
+  move(current, column, twoRows);
+  move(current, -column, twoRows);
+  move(current, column, -twoRows);
+  move(current, -column, -twoRows);
+};
+
+allMoves(49);
