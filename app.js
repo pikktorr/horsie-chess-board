@@ -23,8 +23,11 @@ const nameFields = (letters, numbers) => {
   return board.flat();
 };
 
+
 const fields = nameFields(lettersOfBoard, numbersOfBoard);
 const numFields = nameFields(lettersToNumbers, numbersOfBoard);
+
+console.log(fields);
 
 const blackOrWhite = (number, element) => {
   number % 2 === 0
@@ -98,36 +101,60 @@ const column = 1;
 const twoColumns = 2 * column;
 const row = 8;
 const twoRows = 2 * row;
-const targetFields = horsie.numberOfMoves.eight.flat();
 
-const move = (current, column, row) => {
-  const targetField = current - column - row;
-  console.log(targetField);
+const moveTo = (currentField, num1, num2) => {
+  const targetField = parseInt(currentField) + num1 * column + num2 * row;
   highlightTarget(targetField);
 };
 
-console.log(horsie.numberOfMoves.eight.flat());
+const oneOclock = () => moveTo(event.target.id, 1, -2);
+const twoOclock = () => moveTo(event.target.id, 2, -1);
+const fourOclock = () => moveTo(event.target.id, 2, 1);
+const fiveOclock = () => moveTo(event.target.id, 1, 2);
+const sevenOclock = () => moveTo(event.target.id, -1, 2);
+const eightOclock = () => moveTo(event.target.id, -2, 1);
+const tenOclock = () => moveTo(event.target.id, -2, -1);
+const elevenOclock = () => moveTo(event.target.id, -1, -2);
+
 const targetValues = event => {
-  // switch (true) {
-  //   case event.target.classList.contains("A2"):
-  //     move(event.target.id, twoColumns, row);
-  //     move(event.target.id, -twoColumns, row);
-  //     move(event.target.id, twoColumns, -row);
-  //     break;
-  //   default:
-  //     break;
-  // }
+  clearHighlights();
+  const targetFields = horsie.numberOfMoves;
   const targetClass = event.target.className;
-  if (targetFields.some(element => targetClass.includes(element))) {
-    clearHighlights();
-    move(event.target.id, twoColumns, row);
-    move(event.target.id, -twoColumns, row);
-    move(event.target.id, twoColumns, -row);
-    move(event.target.id, -twoColumns, -row);
-    move(event.target.id, column, twoRows);
-    move(event.target.id, -column, twoRows);
-    move(event.target.id, column, -twoRows);
-    move(event.target.id, -column, -twoRows);
+  switch (true) {
+    case targetFields.eight
+      .flat()
+      .some(element => targetClass.includes(element)):
+      oneOclock();
+      twoOclock();
+      fourOclock();
+      fiveOclock();
+      sevenOclock();
+      eightOclock();
+      tenOclock();
+      elevenOclock();
+      break;
+    case targetFields.six[0]
+      .flat()
+      .some(element => targetClass.includes(element)):
+      oneOclock();
+      twoOclock();
+      fourOclock();
+      fiveOclock();
+      sevenOclock();
+      elevenOclock();
+      break;
+    case targetFields.six[1]
+      .flat()
+      .some(element => targetClass.includes(element)):
+      oneOclock();
+      fiveOclock();
+      sevenOclock();
+      eightOclock();
+      tenOclock();
+      elevenOclock();
+      break;
+    default:
+      break;
   }
 };
 
