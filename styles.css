@@ -2,27 +2,105 @@
   margin: 0;
   padding: 0;
   box-sizing: content-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
 }
-.container {
+body {
+  height: 100vh;
   display: flex;
-  width: 800px;
-  height: 800px;
-  border: 30px rgb(121, 85, 72) solid;
-  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.board {
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+.container {
   display: grid;
+  grid-template-areas:
+    ". upper-letters ."
+    "left-numbers board right-numbers"
+    ". bottom-letters.";
+  width: 540px;
+  height: 540px;
+  background-color: tan;
+}
+
+.letters {
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  width: 480px;
+  color: rgba(160, 81, 45);
+}
+
+.upper {
+  grid-area: upper-letters;
+}
+
+.bottom {
+  grid-area: bottom-letters;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  grid-area: numbers;
+  height: 480px;
+  width: 30px;
+  color: rgba(160, 81, 45);
+}
+
+.left {
+  grid-area: left-numbers;
+}
+
+.right {
+  grid-area: right-numbers;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 60px;
+}
+.board {
+  width: 480px;
+  height: 480px;
+  display: grid;
+  grid-area: board;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
 
+.horsie {
+  height: 60px;
+  grid-area: horsie;
+}
+
 .field {
-  background-color: antiquewhite;
-  width: 100px;
-  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: antiquewhite; */
+  width: 60px;
+  height: 60px;
   transition: 0.2s ease-in;
 }
 .field:hover {
@@ -32,11 +110,11 @@
 }
 
 .black {
-  background-color: sienna;
+  background-color: rgba(160, 81, 45);
 }
 
 .white {
-  background-color: antiquewhite;
+  background-color: rgba(250, 235, 215);
 }
 
 .highlight {

@@ -1,9 +1,41 @@
 const lettersOfBoard = ["A", "B", "C", "D", "E", "F", "G", "H"];
 const lettersToNumbers = lettersOfBoard.map(letter => letter.charCodeAt(0));
 const numbersOfBoard = [1, 2, 3, 4, 5, 6, 7, 8];
+const container = document.querySelector(".container");
 const boardDiv = document.querySelector(".board");
-
 let board = [];
+
+//CREATING LETTER LEGEND FOR THE BOARD
+const lettersLegend = classname => {
+  const letters = document.createElement("div");
+  letters.className = `${classname} letters legend`;
+
+  lettersOfBoard.map(letter => {
+    const div = document.createElement("div");
+    div.className = `letter ${letter}`;
+    div.innerHTML = `${letter}`;
+    letters.appendChild(div);
+  });
+  container.appendChild(letters);
+};
+lettersLegend("upper");
+lettersLegend("bottom");
+
+//CREATING NUMBER LEGEND FOR THE BOARD
+const numbersLegend = classname => {
+  const numbers = document.createElement("div");
+  numbers.className = `${classname} numbers legend`;
+
+  numbersOfBoard.map(number => {
+    const div = document.createElement("div");
+    div.className = `number ${number}`;
+    div.innerHTML = `${number}`;
+    numbers.appendChild(div);
+  });
+  container.appendChild(numbers);
+};
+numbersLegend("left");
+numbersLegend("right");
 
 const numberLoop = i => {
   for (let j = 0; j < numbersOfBoard.length; j++) {
@@ -37,9 +69,8 @@ const addFields = () => {
     const div = document.createElement("div");
     const fieldName = fields[i][0] + fields[i][1];
     const fieldNumber = numFields[i][0] + numFields[i][1];
-    div.className = `field ${fieldName} ${fieldNumber} ${i + 1}`;
-    div.innerHTML = `${fieldName} ${fieldNumber} ${i + 1}`;
-    // div.id = i + 1;
+    div.className = `field ${fieldName} ${fieldNumber}`;
+    // div.innerHTML = `${fieldName} ${fieldNumber} ${i + 1}`;
     div.id = fieldName;
     blackOrWhite(fieldNumber, div);
     boardDiv.appendChild(div);
@@ -55,10 +86,12 @@ const squareEvent = squares.forEach(square => {
       placeFigure(event);
       showCurrentId(event);
       moveTo();
+      numberOfMoves();
     } else if (event.target.className.includes("highlight")) {
       placeFigure(event);
       showCurrentId(event);
       moveTo();
+      numberOfMoves();
     }
   });
 });
@@ -118,4 +151,10 @@ const highlightTarget = target => {
 const clearHighlights = () => {
   const targetDivs = document.querySelectorAll(".field");
   targetDivs.forEach(div => div.classList.remove("highlight"));
+};
+
+const numberOfMoves = () => {
+  const instructions = document.querySelector(".instructions");
+  const highlighted = document.querySelectorAll(".highlight");
+  instructions.innerHTML = `You have ${highlighted.length} valid moves`;
 };
