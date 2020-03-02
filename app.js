@@ -96,8 +96,13 @@ const squareEvent = squares.forEach(square => {
   });
 });
 
+//MOVING ACTIONS
+
 let moveCounter = 0;
-console.log(moveCounter);
+let currentId;
+let idLetter;
+let idNumber;
+let targetId;
 
 const placeFigure = event => {
   const figure = document.querySelector(".horsie");
@@ -107,11 +112,6 @@ const placeFigure = event => {
   console.log(moveCounter);
   clearHighlights();
 };
-
-let currentId;
-let idLetter;
-let idNumber;
-let targetId;
 
 const showCurrentId = event => {
   currentId = [event.target.id[0], parseInt(event.target.id[1])];
