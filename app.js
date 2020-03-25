@@ -109,7 +109,6 @@ const placeFigure = event => {
   const parent = event.target;
   parent.appendChild(figure);
   moveCounter++;
-  console.log(moveCounter);
   clearHighlights();
 };
 
