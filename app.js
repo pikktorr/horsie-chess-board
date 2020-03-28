@@ -59,9 +59,12 @@ const fields = nameFields(lettersOfBoard, numbersOfBoard);
 const numFields = nameFields(lettersToNumbers, numbersOfBoard);
 
 const blackOrWhite = (number, element) => {
+  //checks if the number is even
   number % 2 === 0
-    ? element.classList.add("black")
-    : element.classList.add("white");
+    ? //if the number is even, the field will be black
+      element.classList.add("black")
+    : //if the number is odd, the field will be white
+      element.classList.add("white");
 };
 
 const addFields = () => {
@@ -69,8 +72,7 @@ const addFields = () => {
     const div = document.createElement("div");
     const fieldName = fields[i][0] + fields[i][1];
     const fieldNumber = numFields[i][0] + numFields[i][1];
-    div.className = `field ${fieldName} ${fieldNumber}`;
-    // div.innerHTML = `${fieldName} ${fieldNumber} ${i + 1}`;
+    div.className = `field ${fieldNumber}`;
     div.id = fieldName;
     blackOrWhite(fieldNumber, div);
     boardDiv.appendChild(div);
@@ -83,15 +85,14 @@ const squares = document.querySelectorAll(".field");
 const squareEvent = squares.forEach(square => {
   square.addEventListener("click", event => {
     if (moveCounter === 0) {
-      placeFigure(event);
-      showCurrentId(event);
-      moveTo();
-      numberOfMoves();
+      // first move
+      theMove();
     } else if (event.target.className.includes("highlight")) {
-      placeFigure(event);
-      showCurrentId(event);
-      moveTo();
-      numberOfMoves();
+      // then only highlighted fields are valid
+      theMove();
+    } else {
+      //else you get a pop-up error message
+      alert("You can't move there. Please choose a highlighted field!");
     }
   });
 });
@@ -156,4 +157,11 @@ const numberOfMoves = () => {
   const instructions = document.querySelector(".instructions");
   const highlighted = document.querySelectorAll(".highlight");
   instructions.innerHTML = `You have ${highlighted.length} valid moves`;
+};
+
+const theMove = () => {
+  placeFigure(event);
+  showCurrentId(event);
+  moveTo();
+  numberOfMoves();
 };
